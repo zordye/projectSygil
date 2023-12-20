@@ -4,7 +4,7 @@
 }
 
 body {
-    background: #0000ff;
+    background: #da2c25;
 }
 
 .container {
@@ -19,18 +19,28 @@ body {
     align-items: center;
     margin-top: 2em;
     margin-bottom: 2em;
-    background: #0080ff;
+    background: #da2578;
+    padding: 2em;
+}
+
+.welcome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    background: #da2578;
     padding: 2em;
 }
 
 .bottom {
     padding: 2em;
-    background: #8000ff;
+    background: #da8725;
 }
 
 .home_box {
     display: flex;
-    background: #8000ff;
+    background: #da8725;
 }
 
 .campaign_form {
