@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Sygil</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="home_box">
+            <div class="left">
+                {% if messages %}
+                    <ul class="messages">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                {% if request.session.email_error %}
+                    <p>{{ request.session.email_error }}</p>
+                {% endif %}
+                <form action="/register/" method="post">
+                    {% csrf_token %}
+                    <h2>Register</h2>
+                    <div class="form_group">
+                        <label for="username">Username:</label>
+                        <input type="text" name="username">
+                    </div>
+                    <div class="form_group">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email">
+                    </div>
+                    <div class="form_group">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password">
+                    </div>
+                    <div class="form_group">
+                        <label for="confirm">Confirm Password:</label>
+                        <input type="password" name="confirm">
+                    </div>
+                    <input type="submit" value="Register">
+                </form>
+            </div>
+            <div class="right">
+                <form action="/login/" method="post">
+                    {% csrf_token %}
+                    <h2>Login</h2>
+                    <div class="form_group">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email">
+                    </div>
+                    <div class="form_group">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password">
+                    </div>
+                    <input type="submit" value="Login">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

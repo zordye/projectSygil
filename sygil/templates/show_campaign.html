@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Sygil</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="top">
+            <h1>{{campaign.name}}</h1>
+            <nav>
+                <div class="topNav">
+                    <a href="/dashboard/">Home</a>
+                    <a href="">Create new Character</a>
+                    <a href="/create/new/campaign/">Create new Campaign</a>
+                    <a href="">Create new Homebrew</a>
+                </div>
+                <div class="bottomNav">
+                    <a href="">Browse Characters</a>
+                    <a href="/show/public_campaigns/">Browse Campaigns</a>
+                    <a href="">Browse Homebrew</a>
+                    <a href="/logout/">Logout</a>
+                </div>
+            </nav>
+        </div>
+        <div class="bottom">
+            <h2>DM: {{campaign.creator.username}}</h2>
+            <h3>{{campaign.description}}</h3>
+            <table>
+                <thead>
+                    <th>Player</th>
+                    <th>Character Name</th>
+                    <th>Classes</th>
+                    <th>Actions</th>
+                </thead>
+                
+                {% if campaign.name == "West Marches" %}
+                    <tr>
+                        <td>Evios</td>
+                        <td>Leo Sygil</td>
+                        <td>Rogue</td>
+                        <td>Show</td>
+                    </tr>
+                    <tr>
+                        <td>Cretyr</td>
+                        <td>Song Wuhan</td>
+                        <td>Adept, Beserker</td>
+                        <td>Show</td>
+                    </tr>
+                    <tr>
+                        <td>Veretan</td>
+                        <td>Thomas Wayne Bateman</td>
+                        <td>Warlock</td>
+                        <td>Show</td>
+                    </tr>
+                    <tr>
+                        <td>Izra</td>
+                        <td>Delendi</td>
+                        <td>Sorcerer</td>
+                        <td>Show</td>
+                    </tr>
+                    <tr>
+                        <td>Arith</td>
+                        <td>Durwood</td>
+                        <td>Druid</td>
+                        <td>Show</td>
+                    </tr>
+                {% elif campaign.name == "Amaurea's Dawn" %}
+                    <tr>
+                        <td>Cretyr</td>
+                        <td>The Guardian</td>
+                        <td>The Guardian</td>
+                        <td>Show</td>
+                    </tr>
+                    <tr>
+                        <td>Yeezy</td>
+                        <td>Bred</td>
+                        <td>Rogue</td>
+                        <td>Show</td>
+                    </tr>
+                    <tr>
+                        <td>Arith</td>
+                        <td>Jackson Albix</td>
+                        <td>Priest</td>
+                        <td>Show</td>
+                    </tr>
+                    <tr>
+                        <td>Zordye</td>
+                        <td>Layton</td>
+                        <td>Hunter</td>
+                        <td>Show</td>
+                    </tr>
+                    <tr>
+                        <td>Izra</td>
+                        <td>Hermes Din</td>
+                        <td>Speed Monk</td>
+                        <td>Show</td>
+                    </tr>
+                {% endif %}
+                    
+            </table>
+        </div>
+    </div>
+</body>
+</html>

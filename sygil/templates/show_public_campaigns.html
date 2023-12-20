@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Sygil</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="top">
+            <h1>All Public Campaigns</h1>
+            <nav>
+                <div class="topNav">
+                    <a href="/dashboard/">Home</a>
+                    <a href="">Create new Character</a>
+                    <a href="/create/new/campaign/">Create new Campaign</a>
+                    <a href="">Create new Homebrew</a>
+                </div>
+                <div class="bottomNav">
+                    <a href="">Browse Characters</a>
+                    <a href="">Browse Homebrew</a>
+                    <a href="/logout/">Logout</a>
+                </div>
+            </nav>
+        </div>
+        <div class="bottom">
+            <table>
+                <thead>
+                <th>Name</th>
+                <th>Homebrew</th>
+                <th>Location</th>
+                <th>Online</th>
+                <th>DM</th>
+                <th>Actions</th>
+                </thead>
+                {% for campaign in campaigns.all %}
+                    {% if campaign.public == 1 %}
+                        <tr>
+                            <td>{{campaign.name}}</td>
+                            {% if campaign.homebrew_allowed == 1 %}
+                                <td>Yes</td>
+                            {% elif campaign.homebrew_allowed == 2 %}
+                                <td>No</td>
+                            {% else %}
+                                <td>Ask First</td>
+                            {% endif %}
+                            <td>{{campaign.location}}</td>
+                            {% if campaign.online == 0 %}
+                                <td>No</td>
+                            {% else %}
+                                <td>Yes</td>
+                            {% endif %}
+                            <td>{{campaign.creator.username}}</td>
+                            <td><a href="/show/campaign/{{campaign.id}}">Show</a></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+</body>
+</html>

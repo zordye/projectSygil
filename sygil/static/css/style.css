@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #0000ff;
+}
+
+.container {
+    margin: auto;
+    width: 80%;
+    margin-top: 5em;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    background: #0080ff;
+    padding: 2em;
+}
+
+.bottom {
+    padding: 2em;
+    background: #8000ff;
+}
+
+.home_box {
+    display: flex;
+    background: #8000ff;
+}
+
+.campaign_form {
+    display: flex;
+}
+
+.left {
+    flex: 1;
+}
+
+.right {
+    flex: 1;
+}
+
+.form_group {
+    margin: 1em;
+}
+
+table {
+    border: 2px solid;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: lightgray;
+    border-left: 2px solid;
+}
+
+td {
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+}
+
+.campaigns, .characters, .homebrew {
+    padding: 1em;
+    margin: 1em;
+}

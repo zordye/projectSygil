@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Sygil</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="top">
+            <h1>Welcome {{user.username}}</h1>
+            <nav>
+                <div class="topNav">
+                    <a href="">Create new Character</a>
+                    <a href="/create/new/campaign/">Create new Campaign</a>
+                    <a href="">Create new Homebrew</a>
+                </div>
+                <div class="bottomNav">
+                    <a href="">Browse Characters</a>
+                    <a href="/show/public_campaigns/">Browse Campaigns</a>
+                    <a href="">Browse Homebrew</a>
+                    <a href="/logout/">Logout</a>
+                </div>
+            </nav>
+        </div>
+        <div class="bottom">
+            <div class="characters">
+                <h3>My Characters</h3>
+                {% if user.characters.count > 0 %}
+                    <p>There's something here</p>
+                {% else %}
+                    <p>You Haven't Created Any Characters Yet.</p>
+                {% endif %}
+            </div>
+            <div class="campaigns">
+                <h3>My Campaigns</h3>
+                {% if campaigns.count > 0 %}
+                <table>
+                    <thead>
+                    <th>Name</th>
+                    <th>Homebrew</th>
+                    <th>Location</th>
+                    <th>Online</th>
+                    <th>DM</th>
+                    <th>Actions</th>
+                    </thead>
+                    {% for campaign in campaigns.all %}
+                        <tr>
+                            <td>{{campaign.name}}</td>
+                            {% if campaign.homebrew_allowed == 1 %}
+                                <td>Yes</td>
+                            {% elif campaign.homebrew_allowed == 2 %}
+                                <td>No</td>
+                            {% else %}
+                                <td>Ask First</td>
+                            {% endif %}
+                            <td>{{campaign.location}}</td>
+                            {% if campaign.online == 0 %}
+                                <td>No</td>
+                            {% else %}
+                                <td>Yes</td>
+                            {% endif %}
+                            <td>{{campaign.creator.username}}</td>
+                            <td><a href="/show/campaign/{{campaign.id}}">Show</a><a href="/edit/campaign/{{campaign.id}}">Edit</a><a href="/delete/campaign/{{campaign.id}}">Delete</a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                {% else %}
+                    <p>You Haven't Created Any Campaigns Yet.</p>
+                {% endif %}
+            </div>
+            <div class="homebrew">
+                <h3>My Homebrew</h3>
+                {% if user.characters.count > 0 %}
+                    <p>There's something here</p>
+                {% else %}
+                    <p>You Haven't Created Any Homebrew Yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>    
+</body>
+</html>

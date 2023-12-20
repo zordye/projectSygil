@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Sygil</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="top">
+            <h1>Edit {{campaign.name}}</h1>
+            <nav>
+                <div class="topNav">
+                    <a href="/dashboard/">Home</a>
+                    <a href="">Create new Character</a>
+                    <a href="/create/new/campaign/">Create new Campaign</a>
+                    <a href="">Create new Homebrew</a>
+                </div>
+                <div class="bottomNav">
+                    <a href="">Browse Characters</a>
+                    <a href="/show/public_campaigns/">Browse Campaigns</a>
+                    <a href="">Browse Homebrew</a>
+                    <a href="/logout/">Logout</a>
+                </div>
+            </nav>
+        </div>
+        <div class="bottom">
+            {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            <form action="/update/campaign/" method="post">
+                {% csrf_token %}
+                <div class="campaign_form">
+                    <div class="left">
+                        <div class="form_group">
+                            <label for="name">Name:</label>
+                            <input type="text" name="name" value="{{campaign.name}}">
+                        </div>
+                        <div class="form_group">
+                            <label for="description">Description:</label>
+                            <textarea name="description" cols="30" rows="10">{{campaign.description}}</textarea>
+                        </div>
+                        <div>
+                            <p>Homebrew:</p>
+                            {% if campaign.homebrew_allowed == 1 %}
+                                <div class="form_group">
+                                    <input type="radio" name="homebrew_allowed" id="allowed" value="1" checked="checked">
+                                    <label for="allowed">Homebrew Allowed</label>
+                                </div>
+                                <div class="form_group">
+                                    <input type="radio" name="homebrew_allowed" id="not_allowed" value="2">
+                                    <label for="not_allowed">Homebrew Not Allowed</label>
+                                </div>
+                                <div class="form_group">
+                                    <input type="radio" name="homebrew_allowed" id="ask" value="3">
+                                    <label for="ask">Ask First</label>
+                                </div>
+                            {% elif campaign.homebrew_allowed == 2 %}
+                                <div class="form_group">
+                                    <input type="radio" name="homebrew_allowed" id="allowed" value="1">
+                                    <label for="allowed">Homebrew Allowed</label>
+                                </div>
+                                <div class="form_group">
+                                    <input type="radio" name="homebrew_allowed" id="not_allowed" value="2" checked="checked">
+                                    <label for="not_allowed">Homebrew Not Allowed</label>
+                                </div>
+                                <div class="form_group">
+                                    <input type="radio" name="homebrew_allowed" id="ask" value="3">
+                                    <label for="ask">Ask First</label>
+                                </div>
+                            {% else %}
+                                <div class="form_group">
+                                    <input type="radio" name="homebrew_allowed" id="allowed" value="1">
+                                    <label for="allowed">Homebrew Allowed</label>
+                                </div>
+                                <div class="form_group">
+                                    <input type="radio" name="homebrew_allowed" id="not_allowed" value="2">
+                                    <label for="not_allowed">Homebrew Not Allowed</label>
+                                </div>
+                                <div class="form_group">
+                                    <input type="radio" name="homebrew_allowed" id="ask" value="3" checked="checked">
+                                    <label for="ask">Ask First</label>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div>
+                            <p>Private or Public:</p>
+                            {% if campaign.public == 0 %}
+                                <div class="form_group">
+                                    <input type="radio" name="public" id="isPrivate" value="0" checked="checked">
+                                    <label for="isPrivate">Private</label>
+                                </div>
+                                <div class="form_group">
+                                    <input type="radio" name="public" id="isPublic" value="1">
+                                    <label for="isPublic">Public</label>
+                                </div>
+                            {% else %}
+                                <div class="form_group">
+                                    <input type="radio" name="public" id="isPrivate" value="0">
+                                    <label for="isPrivate">Private</label>
+                                </div>
+                                <div class="form_group">
+                                    <input type="radio" name="public" id="isPublic" value="1" checked="checked">
+                                    <label for="isPublic">Public</label>
+                                </div>
+                            {% endif %}
+                        </div>            
+                        <div class="form_group">
+                            <label for="location">Location:</label>
+                            <input type="text" name="location" value="{{campaign.location}}">
+                        </div>
+                        <div>
+                            <p>In person or Online:</p>
+                            {% if campaign.online == 0 %}
+                                <div class="form_group">
+                                    <input type="radio" name="online" id="isInPerson" value="0" checked="checked">
+                                    <label for="isInPerson">In Person</label>
+                                </div>
+                                <div class="form_group">
+                                    <input type="radio" name="online" id="isOnline" value="1">
+                                    <label for="isOnline">Online</label>
+                                </div>
+                            {% else %}
+                            <div class="form_group">
+                                <input type="radio" name="online" id="isInPerson" value="0">
+                                <label for="isInPerson">In Person</label>
+                            </div>
+                            <div class="form_group">
+                                <input type="radio" name="online" id="isOnline" value="1" checked="checked">
+                                <label for="isOnline">Online</label>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="campaign_id" value="{{campaign.id}}">
+                <input type="submit" value="Create">
+            </form>
+        </div>
+        
+    </div>
+</body>
+</html>
